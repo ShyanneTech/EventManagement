@@ -33,11 +33,11 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: "user"
+        default: "organizer"
     }
 });
 
-//Hashing password before saving user
+//Hashing password before saving organizer
 userSchema.pre("save", async function(next) {
     const salt = await bcrypt.genSalt();
 
@@ -55,5 +55,5 @@ userSchema.statics.login = async function (email, password, role) {
     return user;
 };
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const Organizer = mongoose.model("Organizer", userSchema);
+module.exports = Organizer;
