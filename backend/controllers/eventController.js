@@ -103,9 +103,10 @@ const deleteEvent = async (req, res) => {
         if (!event) {
             return res.status(404).json({ error: "Event not found" });
         }
-        await event.remove();
+        await event.deleteOne();
         res.status(200).json({ message: "Event deleted successfully" });
     } catch (err) {
+        console.log(err);
         return res.status(500).json({
             error: "Internal server error"
         });

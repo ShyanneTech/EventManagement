@@ -46,26 +46,30 @@ const organizerCheck = async (req, res, next) => {
         return res.status(401).json({
             error: "Authentication required"
         });
-    };
+    }
 
     try {
         const decodedToken = jwt.verify(token, process.env.SECRET);
 
-        const user = await Organizer.findById(decodedToken.id);
-        if (!user || user.role !== "organizer") {
+        const organizer = await Organizer.findById(decodedToken.id);
+        if (!organizer || organizer.role !== "organizer") {
             return res.status(403).json({
-                error: "Access Denied only organizer is allowed"
+                error: "Access Denied: Only organizers are allowed"
             });
         }
 
-        req.user = user;
+        req.user = organizer;
         next();
-    } catch(err) {
+    } catch (err) {
         return res.status(401).json({
-            message: "Invalid token"
+            error: "Invalid token"
         });
-    };
-}
+    }
+};
+
+module.exports = {
+    organizerCheck
+};
 
 module.exports = {
     requireAuth,
