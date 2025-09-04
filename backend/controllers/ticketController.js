@@ -48,7 +48,7 @@ const deleteTicket = async (req, res) => {
             return res.status(404).json({ error: "Ticket not found" });
         }
 
-        await ticket.remove();
+        await ticket.deleteOne();
         res.status(200).json({ message: "Ticket deleted successfully" });
     } catch (err) {
         return res.status(500).json({
