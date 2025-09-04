@@ -1,9 +1,8 @@
 const jwt = require("jsonwebtoken");
 const Organizer = require("../models/Organizer");
 
-
 const requireAuth = (req, res, next) => {
-    const token = res.cookies.jwt;
+    const token = req.cookies.jwt;
 
     if (token) {
         jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
@@ -21,7 +20,7 @@ const requireAuth = (req, res, next) => {
 };
 
 const checkUser = (req, res, next) => {
-    const token = res.cookies.jwt;
+    const token = req.cookies.jwt;
 
     if (token) {
         jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
