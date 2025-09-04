@@ -36,7 +36,7 @@ const createEvents = async  (req, res) => {
 const editEvents = async  (req, res) => {
     try {
         const { eventName, category, price, startDate, endDate, venue, eventDescription, ticketImage, venueAddress, schedule } = req.body;
-        const { eventId } = req.params.id;
+        const eventId = req.params.id;
 
         const event = await Event.findByIdAndUpdate(eventId, {
             eventName,
@@ -52,8 +52,7 @@ const editEvents = async  (req, res) => {
         });
 
         res.status(201).json({
-            message: "Event edited successfully",
-            event
+            message: "Event edited successfully"
         });
     } catch (err) {
         console.error(err);
