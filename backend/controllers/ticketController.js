@@ -32,6 +32,7 @@ const disableTicket = async (req, res) => {
 
         ticket.disabled = true;
         await ticket.save();
+        res.status(200).json({ message: "Ticket disabled successfully" });
     } catch (err) {
         return res.status(500).json({
             error: "Internal server error"
