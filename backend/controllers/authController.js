@@ -119,6 +119,7 @@ logout = async (req, res) => {
     res.cookie("jwt", "", {
         maxAge: 1
     });
+    res.status(200).json({ message: "Successfully logged out" });
 };
 
 module.exports = {
